@@ -1,6 +1,8 @@
 package com.itheime.service;
 
 import com.itheime.dao.ArticleJDBCDAO;
+import com.itheime.generator.AirticleMapper;
+import com.itheime.generator.ArticleDao;
 import com.itheime.model.Article;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -12,11 +14,12 @@ import java.util.List;
 
 @Slf4j
 @Service
-public class ArticleRestJDBCServiceImp implements AricleRestService {
+public class ArticleMyBaticsServiceImp implements AricleRestService {
 
     @Resource
     ArticleJDBCDAO articleJDBCDAO;
-
+    @Resource
+    private AirticleMapper articleMapper;
 
     @Transactional
     @Override
@@ -40,13 +43,13 @@ public class ArticleRestJDBCServiceImp implements AricleRestService {
 
     @Override
     public Article getArticle(Long id) {
-        return articleJDBCDAO.findById(id);
+        return articleMapper.findById(id);
 
     }
 
     @Override
     public List<Article> getAll() {
-        return articleJDBCDAO.findAll();
+        return articleMapper.findAll();
     }
 }
 
